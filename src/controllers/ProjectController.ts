@@ -29,6 +29,44 @@ export class ProjectController {
         }
     }
 
+    static updateProject = async (req: Request, res: Response) => {
+        const { id } = req.params
+        try {
+            const project = await Project.findByIdAndUpdate(id, req.body, { new: true })
+            if (project) {
+                res.json({ data: project })
+            }
+            else
+                res.status(404).json({ error: 'Producto no encontrado' })
+        } catch (error) {
+            console.log(colores.bgRed(`Error localizando el proyecto: ${id}. Detalles a continuación`))
+            console.log(error)
+        }
+    }
+
+    /* otra forma de actualizar: buscar, modificar y guardar. 
+    Más lento(2 operaciones) pero mayor control. Escoger según necesidad
+    static updateProject = async (req: Request, res: Response) => {
+        //const id = req.params['id'] como array
+        const { id } = req.params
+        const { projectName, clientName, description } = req.body
+        try {
+            const project = await Project.findById(id)
+            if (project) {
+                project.projectName = projectName
+                project.clientName = clientName
+                project.description = description
+                project.save()
+                res.json({ data: project })
+            }
+            else
+                res.status(404).json({ error: 'Producto no encontrado' })
+        } catch (error) {
+            console.log(colores.bgRed(`Error localizando el proyecto: ${id}. Detalles a continuación`))
+            console.log(error)
+        }
+    }*/
+
     static createProject = async (req: Request, res: Response) => {
         try {
             const project = new Project(req.body)
