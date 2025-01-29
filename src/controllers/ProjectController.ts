@@ -14,6 +14,21 @@ export class ProjectController {
         }
     }
 
+    static getProjectById = async (req: Request, res: Response) => {
+        //const id = req.params['id'] como array
+        const { id } = req.params
+        try {
+            const project = await Project.findById(id)
+            if (project)
+                res.json({ data: project })
+            else
+                res.status(404).json({ error: 'Producto no encontrado' })
+        } catch (error) {
+            console.log(colores.bgRed(`Error localizando el proyecto: ${id}. Detalles a continuación`))
+            console.log(error)
+        }
+    }
+
     static createProject = async (req: Request, res: Response) => {
         try {
             const project = new Project(req.body)
