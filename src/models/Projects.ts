@@ -7,7 +7,8 @@ export type ProjectType = Document & {
     description: string
 }
 
-// definir el esquema que coincide con el tipo anterior
+// definir el esquema que coincide con el tipo anterior 
+// https://mongoosejs.com/docs/schematypes.html
 const ProjectSchema: Schema = new Schema({
     projectName: {
         type: String,
