@@ -10,6 +10,9 @@ connectDB()
 
 const server = express()
 
+// habilitar json
+server.use(express.json())
+
 // Routes
 server.use('/api/projects', projectRoutes)
 
