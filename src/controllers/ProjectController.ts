@@ -80,4 +80,22 @@ export class ProjectController {
             console.log(error)
         }
     }
+
+    static deleteProject = async (req: Request, res: Response) => {
+        const { id } = req.params
+        try {
+            const project = await Project.findByIdAndDelete(id)
+            /* otra forma sería buscarlo y luego borrarlo pero podemos procesar la info
+            antes de borrar (pej ver si cumple algo(de un usuario, etc)) para ello se hace 
+            el findById y luego si se va a borrar project.deleteOne() */
+            if (project) {
+                res.json({ data: 'Eliminado' })
+            }
+            else
+                res.status(404).json({ error: 'Producto no encontrado' })
+        } catch (error) {
+            console.log(colores.bgRed(`Error localizando el proyecto: ${id}. Detalles a continuación`))
+            console.log(error)
+        }
+    }
 }
