@@ -3,9 +3,17 @@ import Project from "../models/Projects"
 import colores from "colors"
 
 export class ProjectController {
+
     static getAllProjects = async (req: Request, res: Response) => {
-        res.send('Listando todos los proyectos')
+        try {
+            const projects = await Project.find({})
+            res.json({ data: projects })
+        } catch (error) {
+            console.log(colores.bgRed('Error listando proyectos. Detalles a continuación'))
+            console.log(error)
+        }
     }
+
     static createProject = async (req: Request, res: Response) => {
         try {
             const project = new Project(req.body)
