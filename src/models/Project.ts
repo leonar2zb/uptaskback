@@ -6,7 +6,13 @@ export interface IProject extends Document {
     projectName: string
     clientName: string
     description: string
-    tasks: PopulatedDoc<ITask>[]
+    tasks: PopulatedDoc<ITask & Document>[]
+    /**
+     * Otras formas válidas pero se deja la del curso
+     * tasks: ITask[] 
+     * tasks: Types.ObjectId[]
+     * tasks: PopulatedDoc<ITask>[]
+     */
 }
 
 // definir el esquema que coincide con el tipo anterior 
