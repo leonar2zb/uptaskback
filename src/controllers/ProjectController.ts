@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import Project from "../models/Projects"
+import Project from "../models/Project"
 import colores from "colors"
 
 export class ProjectController {
