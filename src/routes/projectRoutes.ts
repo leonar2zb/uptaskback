@@ -42,11 +42,18 @@ router.post('/:projectId/tasks',
     handleInputErrors,
     validateProjectExists,
     TaskController.createTask)
-    
+
 router.get('/:projectId/tasks',
     param('projectId').isMongoId().withMessage('ID incorrecto.'),
     handleInputErrors,
     validateProjectExists,
     TaskController.getTasks)
+
+router.get('/:projectId/tasks/:taskId',
+    param('projectId').isMongoId().withMessage('ID incorrecto.'),
+    param('taskId').isMongoId().withMessage('ID incorrecto.'),
+    handleInputErrors,
+    validateProjectExists,
+    TaskController.getTaskById)
 
 export default router

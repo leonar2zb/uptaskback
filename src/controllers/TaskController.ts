@@ -30,4 +30,21 @@ export class TaskController {
         }
     }
 
+    static getTaskById = async (req: Request, res: Response) => {
+        try {
+            const project = req.project //  desde el req desde el middleware project
+            const { taskId } = req.params
+            const task = await Task.findOne({ _id: taskId, project: project.id }).exec();
+            if (!task) {
+                res.status(404).json({ error: 'Hubo un error y no se encuentra' })
+                return
+            }
+            res.json({ task })
+        } catch (error) {
+            console.log(colores.bgRed('Ha ocurrido un error. Detalles a continuación'))
+            console.log(error)
+            res.status(500).json({ error: 'Hubo un error' })
+        }
+    }
+
 }
