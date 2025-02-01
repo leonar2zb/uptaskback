@@ -1,5 +1,4 @@
 import mongoose, { Document, Schema, Types } from "mongoose";
-import Project from "./Project";
 
 // definiendo un diccionario para los estados de las tareas
 const taskStatus = {
@@ -31,7 +30,7 @@ export const TaskSchema: Schema = new Schema({
         trim: true,
         required: true
     },
-    Project: {
+    project: {
         type: Types.ObjectId,
         ref: 'Project'
     },
