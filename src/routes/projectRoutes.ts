@@ -35,6 +35,14 @@ router.delete('/:id',
     handleInputErrors,
     ProjectController.deleteProject)
 
+
+// Rutas para tareas
+// Nota: se pudiera validar de una vez y para todas las rutas que llevan el mismo
+// parámetro projectId y ejecutar el middleware correspondiente y por tanto se pudiera
+// quitar esa validación de todas y la llamada al middleware. Para eso usar esto:
+// router.param('projectId', validateProjectExists) //si poner dos puntos (:)
+// esto se ejecutaría antes que todas las demás. En este caso no me conviene.
+
 router.post('/:projectId/tasks',
     param('projectId').isMongoId().withMessage('ID incorrecto.'),
     body('name').notEmpty().withMessage('El nombre de la tarea es obligatorio'),
