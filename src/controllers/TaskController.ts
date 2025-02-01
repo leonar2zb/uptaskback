@@ -14,6 +14,19 @@ export class TaskController {
         } catch (error) {
             console.log(colores.bgRed('Ha ocurrido un error. Detalles a continuación'))
             console.log(error)
+            res.status(500).json({ error: 'Hubo un error' })
+        }
+    }
+
+    static getTasks = async (req: Request, res: Response) => {
+        try {
+            const project = req.project //  desde el req desde el middleware project
+            const { tasks } = await project.populate('tasks')
+            res.json({ "data": tasks })
+        } catch (error) {
+            console.log(colores.bgRed('Ha ocurrido un error. Detalles a continuación'))
+            console.log(error)
+            res.status(500).json({ error: 'Hubo un error' })
         }
     }
 

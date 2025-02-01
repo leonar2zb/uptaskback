@@ -20,7 +20,7 @@ export class ProjectController {
         try {
             const project = await Project.findById(id)
             if (project)
-                res.json({ data: project })
+                res.json({ data: await project.populate('tasks') })
             else
                 res.status(404).json({ error: 'Producto no encontrado' })
         } catch (error) {
