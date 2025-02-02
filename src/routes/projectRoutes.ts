@@ -64,4 +64,14 @@ router.get('/:projectId/tasks/:taskId',
     validateProjectExists,
     TaskController.getTaskById)
 
+router.put('/:projectId/tasks/:taskId',
+    param('projectId').isMongoId().withMessage('ID incorrecto.'),
+    param('taskId').isMongoId().withMessage('ID incorrecto.'),
+    body('name').notEmpty().withMessage('El nombre de la tarea es obligatorio'),
+    body('description').notEmpty().withMessage('La descripción es obligatoria'),
+    // body('status').isIn(["pending", "onHold", "inProgress", "underReview", "completed"]).withMessage('Estado no válido'),
+    handleInputErrors,
+    validateProjectExists,
+    TaskController.updateTaskById)
+
 export default router
